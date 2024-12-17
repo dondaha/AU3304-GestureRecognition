@@ -79,6 +79,7 @@ for epoch in range(num_epochs):
         model.eval()
         correct = 0
         total = 0
+        misclassified_images = []
         with torch.no_grad():
             for inputs, labels in test_loader:
                 inputs, labels = inputs.to(device), labels.to(device)
@@ -86,6 +87,17 @@ for epoch in range(num_epochs):
                 _, predicted = torch.max(outputs, 1)
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
+                
+                # Collect misclassified images
+                for i in range(len(labels)):
+                    if predicted[i] != labels[i]:
+                        misclassified_images.append((test_loader.dataset.samples[i][0], predicted[i].item(), labels[i].item()))
         
         accuracy = 100 * correct / total
         print(f'Accuracy after epoch {epoch+1}: {accuracy}%')
+        
+        # Print misclassified images
+        if misclassified_images:
+            print("Misclassified images:")
+            for img_path, pred_label, true_label in misclassified_images:
+                print(f'Image: {img_path}, Predicted: {pred_label}, True: {true_label}')
