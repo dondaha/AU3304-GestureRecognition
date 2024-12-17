@@ -5,9 +5,9 @@ import torch.nn.functional as F
 class SimpleCNN(nn.Module):
     def __init__(self):
         super(SimpleCNN, self).__init__()
-        conv1_size = 7
-        conv2_size = 7
-        conv3_size = 5
+        conv1_size = 3
+        conv2_size = 3
+        conv3_size = 3
         self.conv1 = nn.Conv2d(3, 32, conv1_size, padding=conv1_size//2)
         self.bn1 = nn.BatchNorm2d(32)
         self.conv2 = nn.Conv2d(32, 64, conv2_size, padding=conv2_size//2)
