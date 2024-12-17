@@ -5,15 +5,18 @@ import torch.nn.functional as F
 class SimpleCNN(nn.Module):
     def __init__(self):
         super(SimpleCNN, self).__init__()
-        conv1_size = 5
-        conv2_size = 5
-        conv3_size = 3
-        self.conv1 = nn.Conv2d(3, 16, conv1_size, padding=conv1_size//2)
-        self.bn1 = nn.BatchNorm2d(16)
-        self.conv2 = nn.Conv2d(16, 32, conv2_size, padding=conv2_size//2)
-        self.conv3 = nn.Conv2d(32, 64, conv3_size, padding=conv3_size//2)
+        conv1_size = 7
+        conv2_size = 7
+        conv3_size = 5
+        self.conv1 = nn.Conv2d(3, 32, conv1_size, padding=conv1_size//2)
+        self.bn1 = nn.BatchNorm2d(32)
+        self.conv2 = nn.Conv2d(32, 64, conv2_size, padding=conv2_size//2)
+        self.bn2 = nn.BatchNorm2d(64)
+        self.conv3 = nn.Conv2d(64, 128, conv3_size, padding=conv3_size//2)
+        self.bn3 = nn.BatchNorm2d(128)
+        
         self.pool = nn.MaxPool2d(2, 2)
-        self.fc1 = nn.Linear(64 * 37 * 37, 512)
+        self.fc1 = nn.Linear(128 * 37 * 37, 512)
         self.fc2 = nn.Linear(512, 3)
 
     def forward(self, x):
@@ -23,14 +26,16 @@ class SimpleCNN(nn.Module):
         x = self.pool(x)
         
         x = self.conv2(x)
+        x = self.bn2(x)
         x = F.relu(x)
         x = self.pool(x)
         
         x = self.conv3(x)
+        x = self.bn3(x)
         x = F.relu(x)
         x = self.pool(x)
         
-        x = x.view(-1, 64 * 37 * 37)
+        x = x.view(-1, 128 * 37 * 37)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return x

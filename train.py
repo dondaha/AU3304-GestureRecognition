@@ -10,7 +10,7 @@ import torch
 import numpy as np
 import random
 import os
- 
+
 def setup_seed(seed=3407):
     random.seed(seed)  # Python的随机性
     os.environ['PYTHONHASHSEED'] = str(seed)  # 设置Python哈希种子，为了禁止hash随机化，使得实验可复现
