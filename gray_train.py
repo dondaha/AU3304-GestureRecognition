@@ -67,11 +67,11 @@ transform = transforms.Compose([
     # 随机旋转角度
     transforms.RandomRotation(degrees=15, fill=255),
     # 缩放到150*150
-    transforms.Resize((150, 150)),
+    transforms.Resize((100, 100)),
     # 转换为Tensor
     transforms.ToTensor(),
     # 归一化到 [0, 1]
-    transforms.Normalize(mean=[0.5], std=[0.1])
+    transforms.Normalize(mean=[0.5], std=[0.5])
 ])
 
 ## 测试transform，并输出可视化图片
@@ -123,19 +123,22 @@ class SimpleCNN(nn.Module):
     def __init__(self):
         super(SimpleCNN, self).__init__()
         self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, stride=1, padding=1)
+        self.bn1 = nn.BatchNorm2d(32)
         self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, stride=1, padding=1)
+        self.bn2 = nn.BatchNorm2d(64)
         self.conv3 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, stride=1, padding=1)
+        self.bn3 = nn.BatchNorm2d(128)
         self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
-        self.fc1 = nn.Linear(128 * 18 * 18, 512)
+        self.fc1 = nn.Linear(128 * 12 * 12, 512)
         self.fc2 = nn.Linear(512, 3)
-        self.dropout = nn.Dropout(0.5)
+        self.dropout = nn.Dropout(0.1)
         self.relu = nn.ReLU()
 
     def forward(self, x):
-        x = self.pool(self.relu(self.conv1(x)))
-        x = self.pool(self.relu(self.conv2(x)))
-        x = self.pool(self.relu(self.conv3(x)))
-        x = x.view(-1, 128 * 18 * 18)
+        x = self.pool(self.relu(self.bn1(self.conv1(x))))
+        x = self.pool(self.relu(self.bn2(self.conv2(x))))
+        x = self.pool(self.relu(self.bn3(self.conv3(x))))
+        x = x.view(-1, 128 * 12 * 12)
         x = self.dropout(self.relu(self.fc1(x)))
         x = self.fc2(x)
         return x
@@ -150,17 +153,17 @@ test_interval = 1  # Test the model every epoch
 
 def get_current_lr(epoch, optimizer):
     """定义学习率策略，获取当前学习率"""
-    lr = 0.01
-    if epoch >= 20:
+    lr = 0.001
+    if epoch >= 10:
         lr = lr / 100
-    elif epoch >= 10:
+    elif epoch >= 5:
         lr = lr / 10
     logger.info(f'Current learning rate: {lr}')
     return lr
 
 for epoch in range(num_epochs):
     # Update learning rate
-    current_lr = get_current_lr(epoch)
+    current_lr = get_current_lr(epoch, optimizer)
     for param_group in optimizer.param_groups:
         param_group['lr'] = current_lr
 
@@ -210,4 +213,4 @@ for epoch in range(num_epochs):
         
         cm = confusion_matrix(all_labels, all_predictions)
         logger.info("Confusion Matrix:")
-        logger.info(cm)
+        logger.info("\n"+str(cm))
