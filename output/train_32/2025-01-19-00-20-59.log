@@ -1,0 +1,142 @@
+2025-01-19 00:20:59,885 - root - INFO - Setup seed: 1231312
+2025-01-19 00:20:59,946 - root - INFO - Using device: cuda
+2025-01-19 00:20:59,980 - root - INFO - Visualization of transformation saved to /media/sdb/ddh/Big-HW/output/train_32/visualization/transformation.png
+2025-01-19 00:20:59,987 - root - INFO - Training samples: 2520, Testing samples: 372
+2025-01-19 00:20:59,987 - root - INFO - Classes: ['paper', 'rock', 'scissors']
+2025-01-19 00:20:59,988 - root - INFO - Training set class distribution:
+2025-01-19 00:20:59,988 - root - INFO - paper: 840
+2025-01-19 00:20:59,988 - root - INFO - rock: 840
+2025-01-19 00:20:59,988 - root - INFO - scissors: 840
+2025-01-19 00:20:59,988 - root - INFO - Testing set class distribution:
+2025-01-19 00:20:59,988 - root - INFO - paper: 124
+2025-01-19 00:20:59,988 - root - INFO - rock: 124
+2025-01-19 00:20:59,988 - root - INFO - scissors: 124
+2025-01-19 00:21:00,239 - root - INFO - Current learning rate: 0.001
+2025-01-19 00:21:09,548 - root - INFO - Epoch 1/20, Loss: 0.689952800421728
+2025-01-19 00:21:10,728 - root - INFO - Accuracy after epoch 1: 82.52688172043011%
+2025-01-19 00:21:10,731 - root - INFO - Confusion Matrix:
+2025-01-19 00:21:10,731 - root - INFO - 
+[[ 97  14  13]
+ [  2 111  11]
+ [ 12  13  99]]
+2025-01-19 00:21:10,731 - root - INFO - Current learning rate: 0.001
+2025-01-19 00:21:19,745 - root - INFO - Epoch 2/20, Loss: 0.013959914817964022
+2025-01-19 00:21:20,905 - root - INFO - Accuracy after epoch 2: 84.40860215053763%
+2025-01-19 00:21:20,907 - root - INFO - Confusion Matrix:
+2025-01-19 00:21:20,907 - root - INFO - 
+[[ 94  15  15]
+ [  0 118   6]
+ [ 15   7 102]]
+2025-01-19 00:21:20,907 - root - INFO - Current learning rate: 0.001
+2025-01-19 00:21:29,932 - root - INFO - Epoch 3/20, Loss: 0.0027043263004618238
+2025-01-19 00:21:31,094 - root - INFO - Accuracy after epoch 3: 87.09677419354838%
+2025-01-19 00:21:31,095 - root - INFO - Confusion Matrix:
+2025-01-19 00:21:31,095 - root - INFO - 
+[[110   6   8]
+ [  3 109  12]
+ [ 16   3 105]]
+2025-01-19 00:21:31,095 - root - INFO - Current learning rate: 0.001
+2025-01-19 00:21:40,094 - root - INFO - Epoch 4/20, Loss: 0.0007641550293118587
+2025-01-19 00:21:41,255 - root - INFO - Accuracy after epoch 4: 88.70967741935483%
+2025-01-19 00:21:41,257 - root - INFO - Confusion Matrix:
+2025-01-19 00:21:41,257 - root - INFO - 
+[[104  10  10]
+ [  1 115   8]
+ [ 13   0 111]]
+2025-01-19 00:21:41,257 - root - INFO - Current learning rate: 0.001
+2025-01-19 00:21:50,136 - root - INFO - Epoch 5/20, Loss: 0.00043523644747933124
+2025-01-19 00:21:51,294 - root - INFO - Accuracy after epoch 5: 87.90322580645162%
+2025-01-19 00:21:51,296 - root - INFO - Confusion Matrix:
+2025-01-19 00:21:51,296 - root - INFO - 
+[[108   7   9]
+ [  0 116   8]
+ [ 19   2 103]]
+2025-01-19 00:21:51,296 - root - INFO - Current learning rate: 0.0001
+2025-01-19 00:22:00,124 - root - INFO - Epoch 6/20, Loss: 0.0003809344493732434
+2025-01-19 00:22:01,287 - root - INFO - Accuracy after epoch 6: 88.97849462365592%
+2025-01-19 00:22:01,289 - root - INFO - Confusion Matrix:
+2025-01-19 00:22:01,289 - root - INFO - 
+[[105   8  11]
+ [  0 114  10]
+ [ 12   0 112]]
+2025-01-19 00:22:01,289 - root - INFO - Current learning rate: 0.0001
+2025-01-19 00:22:10,121 - root - INFO - Epoch 7/20, Loss: 0.00024570908936778015
+2025-01-19 00:22:11,279 - root - INFO - Accuracy after epoch 7: 87.90322580645162%
+2025-01-19 00:22:11,281 - root - INFO - Confusion Matrix:
+2025-01-19 00:22:11,281 - root - INFO - 
+[[107  10   7]
+ [  0 114  10]
+ [ 18   0 106]]
+2025-01-19 00:22:11,281 - root - INFO - Current learning rate: 0.0001
+2025-01-19 00:22:20,084 - root - INFO - Epoch 8/20, Loss: 0.0002812488075528851
+2025-01-19 00:22:21,238 - root - INFO - Accuracy after epoch 8: 88.17204301075269%
+2025-01-19 00:22:21,240 - root - INFO - Confusion Matrix:
+2025-01-19 00:22:21,240 - root - INFO - 
+[[106   8  10]
+ [  0 114  10]
+ [ 15   1 108]]
+2025-01-19 00:22:21,240 - root - INFO - Current learning rate: 0.0001
+2025-01-19 00:22:30,062 - root - INFO - Epoch 9/20, Loss: 0.00028076655507902615
+2025-01-19 00:22:31,220 - root - INFO - Accuracy after epoch 9: 89.78494623655914%
+2025-01-19 00:22:31,221 - root - INFO - Confusion Matrix:
+2025-01-19 00:22:31,222 - root - INFO - 
+[[109   8   7]
+ [  0 115   9]
+ [ 13   1 110]]
+2025-01-19 00:22:31,222 - root - INFO - Current learning rate: 0.0001
+2025-01-19 00:22:40,048 - root - INFO - Epoch 10/20, Loss: 0.0002989186509751827
+2025-01-19 00:22:41,207 - root - INFO - Accuracy after epoch 10: 87.36559139784946%
+2025-01-19 00:22:41,209 - root - INFO - Confusion Matrix:
+2025-01-19 00:22:41,209 - root - INFO - 
+[[108   7   9]
+ [  0 113  11]
+ [ 20   0 104]]
+2025-01-19 00:22:41,209 - root - INFO - Current learning rate: 1e-05
+2025-01-19 00:22:50,029 - root - INFO - Epoch 11/20, Loss: 0.00039241944595912024
+2025-01-19 00:22:51,187 - root - INFO - Accuracy after epoch 11: 87.36559139784946%
+2025-01-19 00:22:51,188 - root - INFO - Confusion Matrix:
+2025-01-19 00:22:51,189 - root - INFO - 
+[[101  11  12]
+ [  0 117   7]
+ [ 16   1 107]]
+2025-01-19 00:22:51,189 - root - INFO - Current learning rate: 1e-05
+2025-01-19 00:23:00,047 - root - INFO - Epoch 12/20, Loss: 0.00033595802977034984
+2025-01-19 00:23:01,208 - root - INFO - Accuracy after epoch 12: 87.90322580645162%
+2025-01-19 00:23:01,210 - root - INFO - Confusion Matrix:
+2025-01-19 00:23:01,210 - root - INFO - 
+[[109   7   8]
+ [  0 115   9]
+ [ 19   2 103]]
+2025-01-19 00:23:01,210 - root - INFO - Current learning rate: 1e-05
+2025-01-19 00:23:10,063 - root - INFO - Epoch 13/20, Loss: 0.0003210321945838978
+2025-01-19 00:23:11,221 - root - INFO - Accuracy after epoch 13: 88.44086021505376%
+2025-01-19 00:23:11,222 - root - INFO - Confusion Matrix:
+2025-01-19 00:23:11,222 - root - INFO - 
+[[108   6  10]
+ [  1 116   7]
+ [ 17   2 105]]
+2025-01-19 00:23:11,223 - root - INFO - Current learning rate: 1e-05
+2025-01-19 00:23:20,078 - root - INFO - Epoch 14/20, Loss: 0.0002486434588050381
+2025-01-19 00:23:21,235 - root - INFO - Accuracy after epoch 14: 87.09677419354838%
+2025-01-19 00:23:21,237 - root - INFO - Confusion Matrix:
+2025-01-19 00:23:21,237 - root - INFO - 
+[[103  12   9]
+ [  0 116   8]
+ [ 17   2 105]]
+2025-01-19 00:23:21,237 - root - INFO - Current learning rate: 1e-05
+2025-01-19 00:23:30,085 - root - INFO - Epoch 15/20, Loss: 0.0002403843672128241
+2025-01-19 00:23:31,248 - root - INFO - Accuracy after epoch 15: 86.02150537634408%
+2025-01-19 00:23:31,250 - root - INFO - Confusion Matrix:
+2025-01-19 00:23:31,250 - root - INFO - 
+[[102  15   7]
+ [  0 115   9]
+ [ 20   1 103]]
+2025-01-19 00:23:31,250 - root - INFO - Current learning rate: 1e-05
+2025-01-19 00:23:39,883 - root - INFO - Epoch 16/20, Loss: 0.0002885268808359463
+2025-01-19 00:23:41,039 - root - INFO - Accuracy after epoch 16: 88.70967741935483%
+2025-01-19 00:23:41,041 - root - INFO - Confusion Matrix:
+2025-01-19 00:23:41,041 - root - INFO - 
+[[109   6   9]
+ [  0 113  11]
+ [ 16   0 108]]
+2025-01-19 00:23:41,041 - root - INFO - Current learning rate: 1e-05
