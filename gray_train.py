@@ -66,7 +66,7 @@ transform = transforms.Compose([
     transforms.Grayscale(num_output_channels=1),
     # 随机旋转角度
     transforms.RandomRotation(degrees=15, fill=255),
-    # 缩放到150*150
+    # 缩放到100*100
     transforms.Resize((100, 100)),
     # 转换为Tensor
     transforms.ToTensor(),
@@ -148,7 +148,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training loop
-num_epochs = 100
+num_epochs = 20
 test_interval = 1  # Test the model every epoch
 
 def get_current_lr(epoch, optimizer):
@@ -161,11 +161,17 @@ def get_current_lr(epoch, optimizer):
     logger.info(f'Current learning rate: {lr}')
     return lr
 
+# Initialize lists to store learning rate, loss, and accuracy for each epoch
+learning_rates = []
+epoch_losses = []
+epoch_accuracies = []
+
 for epoch in range(num_epochs):
     # Update learning rate
     current_lr = get_current_lr(epoch, optimizer)
     for param_group in optimizer.param_groups:
         param_group['lr'] = current_lr
+    learning_rates.append(current_lr)
 
     model.train()
     running_loss = 0.0
@@ -181,7 +187,9 @@ for epoch in range(num_epochs):
         running_loss += loss.item()
         progress_bar.set_postfix(loss=running_loss/len(train_loader))
     
-    logger.info(f'Epoch {epoch+1}/{num_epochs}, Loss: {running_loss/len(train_loader)}')
+    epoch_loss = running_loss / len(train_loader)
+    epoch_losses.append(epoch_loss)
+    logger.info(f'Epoch {epoch+1}/{num_epochs}, Loss: {epoch_loss}')
     
     # Test the model at specified intervals
     if (epoch + 1) % test_interval == 0:
@@ -209,8 +217,37 @@ for epoch in range(num_epochs):
                         misclassified_images.append((test_loader.dataset.samples[i][0], predicted[i].item(), labels[i].item()))
         
         accuracy = 100 * correct / total
+        epoch_accuracies.append(accuracy)
         logger.info(f'Accuracy after epoch {epoch+1}: {accuracy}%')
         
         cm = confusion_matrix(all_labels, all_predictions)
         logger.info("Confusion Matrix:")
         logger.info("\n"+str(cm))
+
+# Plot learning rate, loss, and accuracy
+plt.figure()
+plt.plot(range(1, num_epochs + 1), learning_rates, label='Learning Rate')
+plt.xlabel('Epoch')
+plt.ylabel('Learning Rate')
+plt.title('Learning Rate per Epoch')
+plt.legend()
+plt.savefig(os.path.join(visualize_dir, 'learning_rate.png'))
+logger.info(f'Learning rate plot saved to {os.path.join(visualize_dir, "learning_rate.png")}')
+
+plt.figure()
+plt.plot(range(1, num_epochs + 1), epoch_losses, label='Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.title('Loss per Epoch')
+plt.legend()
+plt.savefig(os.path.join(visualize_dir, 'loss.png'))
+logger.info(f'Loss plot saved to {os.path.join(visualize_dir, "loss.png")}')
+
+plt.figure()
+plt.plot(range(1, num_epochs + 1), epoch_accuracies, label='Accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy (%)')
+plt.title('Accuracy per Epoch')
+plt.legend()
+plt.savefig(os.path.join(visualize_dir, 'accuracy.png'))
+logger.info(f'Accuracy plot saved to {os.path.join(visualize_dir, "accuracy.png")}')
