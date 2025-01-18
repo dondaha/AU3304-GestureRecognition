@@ -12,6 +12,7 @@ import os
 from PIL import Image
 import matplotlib.pyplot as plt
 import shutil
+from thop import profile  # Import thop for calculating FLOPs and parameters
 
 
 # 配置logger，记录存储到{output_dir}目录下，以当前时间命名
@@ -144,6 +145,7 @@ class SimpleCNN(nn.Module):
         return x
 
 model = SimpleCNN().to(device)
+print(model)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
@@ -165,6 +167,7 @@ def get_current_lr(epoch, optimizer):
 learning_rates = []
 epoch_losses = []
 epoch_accuracies = []
+best_accuracy = 0.0
 
 for epoch in range(num_epochs):
     # Update learning rate
@@ -223,9 +226,23 @@ for epoch in range(num_epochs):
         cm = confusion_matrix(all_labels, all_predictions)
         logger.info("Confusion Matrix:")
         logger.info("\n"+str(cm))
+        
+        if accuracy > best_accuracy:
+            best_accuracy = accuracy
+            torch.save(model.state_dict(), os.path.join(output_dir, 'best_model.pth'))
+            logger.info(f'Best model saved with accuracy: {best_accuracy}%')
+
+torch.save(model.state_dict(), os.path.join(output_dir, 'last_model.pth'))
+logger.info('Last model saved')
+
+# Calculate model parameters and FLOPs
+dummy_input = torch.randn(1, 1, 100, 100).to(device)
+flops, params = profile(model, inputs=(dummy_input,))
+logger.info(f'Model parameters: {params}')
+logger.info(f'Model FLOPs: {flops}')
 
 # Plot learning rate, loss, and accuracy
-plt.figure()
+plt.figure(dpi=150)
 plt.plot(range(1, num_epochs + 1), learning_rates, label='Learning Rate')
 plt.xlabel('Epoch')
 plt.ylabel('Learning Rate')
@@ -235,7 +252,7 @@ plt.legend()
 plt.savefig(os.path.join(visualize_dir, 'learning_rate.png'))
 logger.info(f'Learning rate plot saved to {os.path.join(visualize_dir, "learning_rate.png")}')
 
-plt.figure()
+plt.figure(dpi=150)
 plt.plot(range(1, num_epochs + 1), epoch_losses, label='Loss')
 plt.xlabel('Epoch')
 plt.ylabel('Loss')
@@ -245,7 +262,7 @@ plt.legend()
 plt.savefig(os.path.join(visualize_dir, 'loss.png'))
 logger.info(f'Loss plot saved to {os.path.join(visualize_dir, "loss.png")}')
 
-plt.figure()
+plt.figure(dpi=150)
 plt.plot(range(1, num_epochs + 1), epoch_accuracies, label='Accuracy')
 plt.xlabel('Epoch')
 plt.ylabel('Accuracy (%)')
