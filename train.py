@@ -5,8 +5,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 from model import SimpleCNN
 from tqdm import tqdm
-
-import torch
+from sklearn.metrics import confusion_matrix
 import numpy as np
 import random
 import os
@@ -48,13 +47,31 @@ test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 print(f'Training samples: {len(train_dataset)}, Testing samples: {len(test_dataset)}')
 print(f'Classes: {train_dataset.classes}')
 
+# Print the number of samples per class in the training set
+train_class_counts = {class_name: 0 for class_name in train_dataset.classes}
+for _, label in train_dataset.samples:
+    train_class_counts[train_dataset.classes[label]] += 1
+
+print("Training set class distribution:")
+for class_name, count in train_class_counts.items():
+    print(f'{class_name}: {count}')
+
+# Print the number of samples per class in the testing set
+test_class_counts = {class_name: 0 for class_name in test_dataset.classes}
+for _, label in test_dataset.samples:
+    test_class_counts[test_dataset.classes[label]] += 1
+
+print("Testing set class distribution:")
+for class_name, count in test_class_counts.items():
+    print(f'{class_name}: {count}')
+
 # Initialize model, loss function, and optimizer
 model = SimpleCNN().to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 # Training loop
-num_epochs = 10
+num_epochs = 5
 test_interval = 1  # Test the model every epoch
 
 for epoch in range(num_epochs):
@@ -79,6 +96,8 @@ for epoch in range(num_epochs):
         model.eval()
         correct = 0
         total = 0
+        all_labels = []
+        all_predictions = []
         misclassified_images = []
         with torch.no_grad():
             for inputs, labels in test_loader:
@@ -87,6 +106,10 @@ for epoch in range(num_epochs):
                 _, predicted = torch.max(outputs, 1)
                 total += labels.size(0)
                 correct += (predicted == labels).sum().item()
+                
+                # Collect all labels and predictions
+                all_labels.extend(labels.cpu().numpy())
+                all_predictions.extend(predicted.cpu().numpy())
                 
                 # Collect misclassified images
                 for i in range(len(labels)):
@@ -97,7 +120,12 @@ for epoch in range(num_epochs):
         print(f'Accuracy after epoch {epoch+1}: {accuracy}%')
         
         # Print misclassified images
-        if misclassified_images:
-            print("Misclassified images:")
-            for img_path, pred_label, true_label in misclassified_images:
-                print(f'Image: {img_path}, Predicted: {pred_label}, True: {true_label}')
+        # if misclassified_images:
+        #     print("Misclassified images:")
+        #     for img_path, pred_label, true_label in misclassified_images:
+        #         print(f'Image: {img_path}, Predicted: {pred_label}, True: {true_label}')
+        
+        # Compute and print confusion matrix
+        cm = confusion_matrix(all_labels, all_predictions)
+        print("Confusion Matrix:")
+        print(cm)

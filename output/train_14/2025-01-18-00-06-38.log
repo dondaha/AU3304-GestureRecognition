@@ -1,0 +1,42 @@
+2025-01-18 00:06:38,312 - root - INFO - Using device: cuda
+2025-01-18 00:06:38,327 - root - INFO - Visualization of transformation saved to /media/sdb/ddh/Big-HW/output/train_14/visualization/transformation.png
+2025-01-18 00:06:38,333 - root - INFO - Training samples: 2520, Testing samples: 372
+2025-01-18 00:06:38,333 - root - INFO - Classes: ['paper', 'rock', 'scissors']
+2025-01-18 00:06:38,334 - root - INFO - Training set class distribution:
+2025-01-18 00:06:38,334 - root - INFO - paper: 840
+2025-01-18 00:06:38,334 - root - INFO - rock: 840
+2025-01-18 00:06:38,334 - root - INFO - scissors: 840
+2025-01-18 00:06:38,334 - root - INFO - Testing set class distribution:
+2025-01-18 00:06:38,334 - root - INFO - paper: 124
+2025-01-18 00:06:38,334 - root - INFO - rock: 124
+2025-01-18 00:06:38,334 - root - INFO - scissors: 124
+2025-01-18 00:07:14,285 - root - INFO - Epoch 1/5, Loss: 0.6748733295457838
+2025-01-18 00:07:18,263 - root - INFO - Accuracy after epoch 1: 87.09677419354838%
+2025-01-18 00:07:18,268 - root - INFO - Confusion Matrix:
+2025-01-18 00:07:18,268 - root - INFO - [[ 88  17  19]
+ [  2 120   2]
+ [  1   7 116]]
+2025-01-18 00:07:26,948 - root - INFO - Epoch 2/5, Loss: 0.02802051758523323
+2025-01-18 00:07:28,149 - root - INFO - Accuracy after epoch 2: 81.18279569892474%
+2025-01-18 00:07:28,152 - root - INFO - Confusion Matrix:
+2025-01-18 00:07:28,152 - root - INFO - [[ 92  20  12]
+ [  0 110  14]
+ [ 24   0 100]]
+2025-01-18 00:07:36,806 - root - INFO - Epoch 3/5, Loss: 0.012489816508605145
+2025-01-18 00:07:37,999 - root - INFO - Accuracy after epoch 3: 82.52688172043011%
+2025-01-18 00:07:38,001 - root - INFO - Confusion Matrix:
+2025-01-18 00:07:38,001 - root - INFO - [[112   3   9]
+ [  6 105  13]
+ [ 34   0  90]]
+2025-01-18 00:07:46,631 - root - INFO - Epoch 4/5, Loss: 0.006880540242652583
+2025-01-18 00:07:47,828 - root - INFO - Accuracy after epoch 4: 88.17204301075269%
+2025-01-18 00:07:47,830 - root - INFO - Confusion Matrix:
+2025-01-18 00:07:47,830 - root - INFO - [[109   0  15]
+ [  2 110  12]
+ [ 15   0 109]]
+2025-01-18 00:07:56,456 - root - INFO - Epoch 5/5, Loss: 0.0019559277550774534
+2025-01-18 00:07:57,650 - root - INFO - Accuracy after epoch 5: 87.90322580645162%
+2025-01-18 00:07:57,652 - root - INFO - Confusion Matrix:
+2025-01-18 00:07:57,652 - root - INFO - [[111   2  11]
+ [  0 110  14]
+ [ 18   0 106]]
